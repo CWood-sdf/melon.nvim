@@ -71,8 +71,12 @@ local function placeSigns(force)
         -- print(signDef)
         local _ = vim.api.nvim_exec2(signDef, { output = true })
         -- print(out.out)
+        local priority = 1
+        if sign:match("[a-z]") then
+            priority = 2
+        end
         local signPlace = "call sign_place(0, 'Melon_sign_group', 'Melon_" ..
-            txt .. "', nvim_get_current_buf(), {'lnum':" .. l .. "})"
+            txt .. "', nvim_get_current_buf(), {'lnum':" .. l .. ", 'priority': " .. priority .. "})"
         -- print(signPlace)
         local _ = vim.api.nvim_exec2(signPlace, { output = true })
         ::continue::
